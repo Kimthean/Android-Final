@@ -24,7 +24,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_card, parent, false);
         return new NewsViewHolder(view);
     }
 
@@ -32,7 +32,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         News news = newsList.get(position);
         holder.newsTitle.setText(news.getTitle());
-        holder.newsDescription.setText(news.getDescription());
+        // Assuming you have a method in your News class to get the image resource id
         holder.newsImage.setImageResource(news.getImageResource());
     }
 
@@ -43,14 +43,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView newsTitle;
-        TextView newsDescription;
         ImageView newsImage;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
-            newsTitle = itemView.findViewById(R.id.news_title);
-            newsDescription = itemView.findViewById(R.id.news_description);
-            newsImage = itemView.findViewById(R.id.news_image);
+            newsTitle = itemView.findViewById(R.id.newsTitle);
+            newsImage = itemView.findViewById(R.id.newsImage);
         }
     }
 }

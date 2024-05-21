@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:contentPadding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +19,17 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="3"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            style="@style/roundedImageViewRounded"
+            android:contentDescription="@+id/news_title"
+            />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
             android:orientation="vertical"
+            android:paddingEnd="8dp"
             android:paddingStart="8dp">
 
             <TextView
@@ -31,13 +37,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/news_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
 

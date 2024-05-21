@@ -5,25 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingStart="16dp"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Trending News"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10dp"
+        android:layout_marginStart="14dp"
+        android:text="@string/title_trending"
         android:textColor="?android:attr/textColorPrimary"
-        android:paddingTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_marginTop="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:layout_weight="12"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_news" />
-
+        tools:listitem="@layout/news_card" />
 </LinearLayout>
