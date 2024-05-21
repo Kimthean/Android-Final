@@ -24,6 +24,8 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
