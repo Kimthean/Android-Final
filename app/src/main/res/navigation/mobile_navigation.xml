@@ -12,16 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_news"
-        android:name="com.kimthean.newsapp.ui.news.NewsFragment"
-        android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        android:id="@+id/navigation_category"
+        android:name="com.kimthean.newsapp.ui.category.CategoryFragment"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_category" />
 
     <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.kimthean.newsapp.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/navigation_search"
+        android:name="com.kimthean.newsapp.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.kimthean.newsapp.ui.about.AboutFragment"

@@ -10,14 +10,16 @@ public class News {
     private Source newsSource;
 
     private String newsTimeUpdated;
-    private int imageResource;
 
-    public News(String title, String description, String imageUrl, Source newsSource, String newsTimeUpdated) {
+    private String newsUrl;
+
+    public News(String title, String description, String imageUrl, Source newsSource, String newsTimeUpdated, String newsUrl) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.newsSource= newsSource;
         this.newsTimeUpdated = newsTimeUpdated;
+        this.newsUrl = newsUrl;
     }
 
     // Getter methods
@@ -40,26 +42,9 @@ public class News {
         return newsTimeUpdated;
     }
 
-
-
-    // Setter methods
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNewsUrl() {
+        return newsUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    public void setNewsSource(Source newsSource) {
-        this.newsSource = newsSource;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setImageResource(int imageResource) {
-        this.imageResource = imageResource;
-    }
 }

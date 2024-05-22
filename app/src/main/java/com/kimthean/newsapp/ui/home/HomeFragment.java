@@ -77,7 +77,8 @@ public class HomeFragment extends Fragment {
                                 article.getDescription(),
                                 article.getUrlToImage(),
                                 article.getNewsSource(),
-                                article.getPublishedAt()
+                                article.getPublishedAt(),
+                                article.getNewsUrl()
                         );
                         newsList.add(news);
                     }

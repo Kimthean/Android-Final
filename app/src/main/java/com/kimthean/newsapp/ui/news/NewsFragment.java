@@ -1,8 +1,6 @@
 package com.kimthean.newsapp.ui.news;
 
 
-import static com.kimthean.newsapp.R.id.rvNews;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,7 @@ public class NewsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
 
         rvNews = view.findViewById(R.id.rvNews);
 
@@ -35,22 +33,9 @@ public class NewsFragment extends Fragment {
 
         rvNews.setAdapter(newsAdapter);
 
-//        fillDummyData();
-
         return view;
     }
 
-//    private void fillDummyData() {
-//        for (int i = 0; i < 10; i++) {
-//            News news = new News();
-//            news.setTitle("News Title " + (i + 1));
-//            news.setDescription("News Description " + (i + 1));
-//            news.setImageResource(R.drawable.news_placeholder);
-//            newsList.add(news);
-//        }
-//
-//        newsAdapter.notifyDataSetChanged();
-//    }
 }
 
 

@@ -18,6 +18,9 @@ public class Article {
     @SerializedName("publishedAt")
     private String publishedAt;
 
+    @SerializedName("url")
+    private String newsUrl;
+
     // Getter methods
     public String getTitle() {
         return title;
@@ -36,6 +39,9 @@ public class Article {
     }
     public String getPublishedAt() {
         return publishedAt;
+    }
+    public String getNewsUrl() {
+        return newsUrl;
     }
 
     public void setNewsSource (Source newsSource) {
