@@ -5,4 +5,5 @@
     <string name="title_search">Search</string>
     <string name="title_about">About</string>
     <string name="title_trending" >Trending</string>
+    <string name="title_top_headlines">Top Headline</string>
 </resources>

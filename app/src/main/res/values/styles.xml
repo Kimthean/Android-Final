@@ -5,4 +5,9 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+        <style name="CategoryButton">
+            <item name="android:background">@drawable/rounded_button</item>
+            <item name="android:layout_margin">8dp</item>
+        </style>
+
 </resources>

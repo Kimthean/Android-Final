@@ -2,6 +2,10 @@ package com.kimthean.newsapp.ui.news;
 
 import com.kimthean.newsapp.data.Source;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class News {
     private String title;
     private String description;
@@ -22,13 +26,8 @@ public class News {
         this.newsUrl = newsUrl;
     }
 
-    // Getter methods
     public String getTitle() {
         return title;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public Source getNewsSource() {
@@ -39,7 +38,17 @@ public class News {
     }
 
     public String getNewsTimeUpdated() {
-        return newsTimeUpdated;
+        try {
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = isoFormat.parse(newsTimeUpdated);
+
+            SimpleDateFormat readableFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+            return readableFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return newsTimeUpdated;
+        }
     }
 
     public String getNewsUrl() {
