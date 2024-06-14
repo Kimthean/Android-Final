@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_marginBottom="64dp"
-    android:padding="24dp"
-    >
+    android:padding="24dp">
 
     <ImageView
         android:layout_width="180dp"
@@ -19,12 +18,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:text="@string/sign_up"
         android:textSize="32sp"
+        android:textColor="@color/black"
         android:paddingBottom="16dp"
-        android:text="@string/login"
-        />
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -57,20 +55,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/emailSignInButton"
+        android:id="@+id/signUpBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_with_email"
-        android:background="@drawable/rounded_button"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/googleSignInButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/sign_in_with_google"
+        android:text="@string/sign_up"
         android:background="@drawable/rounded_button"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
@@ -87,19 +75,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="@string/don_t_have_an_account" />
+            android:text="@string/have_an_account" />
 
         <TextView
-            android:id="@+id/signup"
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:paddingStart="4dp"
             android:paddingEnd="0dp"
-            android:text="@string/sign_up"
+            android:text="@string/login"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
     </LinearLayout>
+
+
 
 </LinearLayout>

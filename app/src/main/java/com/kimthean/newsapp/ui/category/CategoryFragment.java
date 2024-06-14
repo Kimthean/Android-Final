@@ -1,5 +1,6 @@
 package com.kimthean.newsapp.ui.category;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +38,12 @@ public class CategoryFragment extends Fragment {
 
     private NewsAdapter newsAdapter;
     private ProgressBar progressBar;
-    private List<News> newsList = new ArrayList<>();
+    private final List<News> newsList = new ArrayList<>();
     private RecyclerView rvNews;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);

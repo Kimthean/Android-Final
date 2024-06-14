@@ -10,4 +10,13 @@
     <string name="sign_in_with_google">SignIn with Google</string>
     <string name="email_hint" >Email</string>
     <string name="password_hint" >Password</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="have_an_account">Have An Account? </string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t Have An Account?</string>
+    <string name="user_settings" >User Settings</string>
+    <string name="change_profile_picture" >Change Profile Picture</string>
+    <string name="save_changes">Save</string>
 </resources>
