@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "364703027899",
+    "project_id": "newsapp-64eef",
+    "storage_bucket": "newsapp-64eef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364703027899:android:0d1b067b3cf81da8e8cf9e",
+        "android_client_info": {
+          "package_name": "com.kimthean.newsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCjqk1k0me7CjxuhGIZDK5xIzpi7-tAn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

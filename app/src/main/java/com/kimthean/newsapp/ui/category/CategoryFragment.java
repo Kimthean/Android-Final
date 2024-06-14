@@ -38,7 +38,6 @@ public class CategoryFragment extends Fragment {
     private NewsAdapter newsAdapter;
     private ProgressBar progressBar;
     private List<News> newsList = new ArrayList<>();
-
     private RecyclerView rvNews;
 
     private SwipeRefreshLayout swipeRefreshLayout;

@@ -3,7 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_category">Category</string>
     <string name="title_search">Search</string>
-    <string name="title_about">About</string>
+    <string name="title_profile">Profile</string>
     <string name="title_trending" >Trending</string>
     <string name="title_top_headlines">Top Headline</string>
+    <string name="sign_in_with_email">SignIn with Email</string>
+    <string name="sign_in_with_google">SignIn with Google</string>
+    <string name="email_hint" >Email</string>
+    <string name="password_hint" >Password</string>
 </resources>
