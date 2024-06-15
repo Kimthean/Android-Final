@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class SignupActivity extends AppCompatActivity {
     EditText emailEditText;
     EditText passwordEditText;
 
+    EditText usernameEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
 
          emailEditText = findViewById(R.id.emailEditText);
          passwordEditText = findViewById(R.id.passwordEditText);
+         usernameEditText = findViewById(R.id.usernameEditText);
         Button signUpButton = findViewById(R.id.signUpBtn);
         TextView login = findViewById(R.id.login);
 
@@ -66,9 +70,12 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignupActivity.this, "Authentication successful.",
-                                    Toast.LENGTH_SHORT).show();
                             if (user != null) {
+                                Toast.makeText(SignupActivity.this, "Authentication successful.",
+                                        Toast.LENGTH_SHORT).show();
+                                user.updateProfile(new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(usernameEditText.getText().toString())
+                                        .build());
                             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
