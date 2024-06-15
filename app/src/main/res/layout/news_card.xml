@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -21,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/title_profile"
             android:adjustViewBounds="true"/>
 
         <LinearLayout
@@ -38,21 +38,42 @@
                 android:textStyle="bold"
                 android:ellipsize="end"
                 android:maxLines="2"/>
-            <TextView
-                android:id="@+id/newsSource"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="8dp"/>
+
+
 
             <TextView
-                android:id="@+id/newsTimeUpdated"
+                android:id="@+id/newsSource"
+                android:layout_width="201dp"
+                android:layout_height="wrap_content"
+
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp"/>
+                >
+
+                <TextView
+                    android:id="@+id/newsTimeUpdated"
+                    android:layout_width="201dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/bookmarkButton"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_bookmark"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/bookmark" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 

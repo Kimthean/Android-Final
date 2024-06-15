@@ -44,9 +44,6 @@ public class Article {
         return newsUrl;
     }
 
-    public void setNewsSource (Source newsSource) {
-        this.newsSource = newsSource;
-    }
 
 }
 

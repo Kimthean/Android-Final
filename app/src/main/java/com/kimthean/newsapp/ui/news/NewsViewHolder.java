@@ -3,6 +3,7 @@ package com.kimthean.newsapp.ui.news;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,12 +24,16 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView newsTimeUpdated;
 
+    private final ImageButton bookmarkButton;
+
     public NewsViewHolder(@NonNull View itemView, List<News> newsList) {
         super(itemView);
         newsTitle = itemView.findViewById(R.id.newsTitle);
         newsImage = itemView.findViewById(R.id.newsImage);
         newsSource = itemView.findViewById(R.id.newsSource);
         newsTimeUpdated = itemView.findViewById(R.id.newsTimeUpdated);
+        bookmarkButton = itemView.findViewById(R.id.bookmarkButton);
+
 
         itemView.setOnClickListener(v -> {
             int position = getAdapterPosition();

@@ -57,6 +57,23 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+
+                if (email.isEmpty()) {
+                    emailEditText.setError("Email is required.");
+                    return;
+                }
+                if (password.isEmpty()) {
+                    passwordEditText.setError("Password is required.");
+                    return;
+                }
+                if (password.length() < 6) {
+                    passwordEditText.setError("Password must be at least 6 characters.");
+                    return;
+                }
+                if (usernameEditText.getText().toString().isEmpty()) {
+                    usernameEditText.setError("Username is required.");
+                    return;
+                }
                 signUpWithEmail(email, password);
             }
         });

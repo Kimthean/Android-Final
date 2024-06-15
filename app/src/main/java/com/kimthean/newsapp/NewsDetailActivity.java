@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,12 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         String newsUrl = intent.getStringExtra("url");
 
-        webView.loadUrl(newsUrl);
+        if (newsUrl != null) {
+            webView.loadUrl(newsUrl);
+        } else {
+            Toast.makeText(this, "No URL found", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

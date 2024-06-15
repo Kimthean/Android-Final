@@ -43,7 +43,7 @@ public class CategoryFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);

@@ -2,6 +2,7 @@ package com.kimthean.newsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
         emailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (emailEditText.getText().toString().isEmpty()) {
+                    emailEditText.setError("Email is required.");
+                    return;
+                }
                 signInWithEmail(emailEditText.getText().toString(), passwordEditText.getText().toString());
             }
         });
@@ -120,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 Toast.makeText(LoginActivity.this, "Google sign in failed", Toast.LENGTH_SHORT).show();
                 String errorMessage = e.getMessage();
-                System.out.println(errorMessage);
+                Log.e("Google sign in failed", errorMessage, e);
                 updateUI(null);
             }
         }

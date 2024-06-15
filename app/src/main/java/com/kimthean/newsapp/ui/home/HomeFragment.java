@@ -34,9 +34,12 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        super.onCreate(savedInstanceState);
 
         progressBar= view.findViewById(R.id.progressBar);
         RecyclerView rvNews = view.findViewById(R.id.rvNews);
@@ -89,7 +92,6 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onFailure(@NonNull Call<NewsApiResponse> call, @NonNull Throwable t) {
-
                 swipeRefreshLayout.setRefreshing(false);
                 progressBar.setVisibility(View.GONE);
                 t.printStackTrace();
