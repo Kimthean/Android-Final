@@ -20,6 +20,7 @@ import com.kimthean.newsapp.ui.news.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
         newsAdapter = new NewsAdapter(newsList);
 
         rvNews.setAdapter(newsAdapter);
+        progressBar.setVisibility(View.VISIBLE);
 
         fetchNewsData();
         swipeRefreshLayout.setOnRefreshListener(this::fetchNewsData);
@@ -57,7 +59,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchNewsData() {
-        progressBar.setVisibility(View.VISIBLE);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -77,15 +79,17 @@ public class HomeFragment extends Fragment {
 
                     newsList.clear();
                     for (Article article : articles) {
-                        News news = new News(
-                                article.getTitle(),
-                                article.getDescription(),
-                                article.getUrlToImage(),
-                                article.getNewsSource(),
-                                article.getPublishedAt(),
-                                article.getNewsUrl()
-                        );
-                        newsList.add(news);
+                        if (!Objects.equals(article.getTitle(), "[Removed]") && article.getUrlToImage() != null) {
+                            News news = new News(
+                                    article.getTitle(),
+                                    article.getDescription(),
+                                    article.getUrlToImage(),
+                                    article.getNewsSource(),
+                                    article.getPublishedAt(),
+                                    article.getNewsUrl()
+                            );
+                            newsList.add(news);
+                        }
                     }
                     newsAdapter.notifyDataSetChanged();
                 }

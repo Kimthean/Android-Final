@@ -20,4 +20,5 @@
     <string name="change_profile_picture" >Change Profile Picture</string>
     <string name="save_changes">Save</string>
     <string name="username_hint">Username</string>
+    <string name="search_hint">Search for anything</string>
 </resources>

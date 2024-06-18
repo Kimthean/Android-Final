@@ -27,6 +27,7 @@ import com.kimthean.newsapp.ui.news.NewsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,6 +61,9 @@ public class CategoryFragment extends Fragment {
 
         categoryTitle.setText("Technology");
         this.progressBar = progressBar;
+
+        progressBar.setVisibility(View.VISIBLE);
+
         fetchNewsData("technology");
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -104,7 +108,6 @@ public class CategoryFragment extends Fragment {
     }
 
     private void fetchNewsData(String category) {
-        progressBar.setVisibility(View.VISIBLE);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
@@ -127,15 +130,17 @@ public class CategoryFragment extends Fragment {
 
                     newsList.clear();
                     for (Article article : articles) {
-                        News news = new News(
-                                article.getTitle(),
-                                article.getDescription(),
-                                article.getUrlToImage(),
-                                article.getNewsSource(),
-                                article.getPublishedAt(),
-                                article.getNewsUrl()
-                        );
-                        newsList.add(news);
+                        if (!Objects.equals(article.getTitle(), "[Removed]") && article.getUrlToImage() != null) {
+                            News news = new News(
+                                    article.getTitle(),
+                                    article.getDescription(),
+                                    article.getUrlToImage(),
+                                    article.getNewsSource(),
+                                    article.getPublishedAt(),
+                                    article.getNewsUrl()
+                            );
+                            newsList.add(news);
+                        }
                     }
                     newsAdapter.notifyDataSetChanged();
                 }

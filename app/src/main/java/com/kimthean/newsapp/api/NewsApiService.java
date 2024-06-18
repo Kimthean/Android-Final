@@ -13,5 +13,11 @@ public interface NewsApiService {
             @Query("apiKey") String apiKey,
             @Query("category") String category
     );
+
+    @GET("everything")
+    Call<NewsApiResponse> getEverything(
+            @Query("q") String query,
+            @Query("apiKey") String apiKey
+    );
 }
 
