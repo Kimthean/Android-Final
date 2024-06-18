@@ -1,10 +1,12 @@
 package com.kimthean.newsapp.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import androidx.lifecycle.ViewModelProvider;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
     private NewsAdapter newsAdapter;
+    private NewsViewModel newsViewModel;
+
     private List<News> newsList;
 
     private ProgressBar progressBar;
@@ -46,20 +50,26 @@ public class HomeFragment extends Fragment {
         RecyclerView rvNews = view.findViewById(R.id.rvNews);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
-        newsList = new ArrayList<>();
-        newsAdapter = new NewsAdapter(newsList);
+        newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
+        newsList = newsViewModel.getNewsList().getValue();
+        Log.d("HomeFragment", "onCreateView: " + newsList);
+
+        if (newsList == null || newsList.isEmpty()) {
+            newsList = new ArrayList<>();
+            fetchNewsData();
+            newsAdapter = new NewsAdapter(newsList);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+
 
         rvNews.setAdapter(newsAdapter);
-        progressBar.setVisibility(View.VISIBLE);
-
-        fetchNewsData();
         swipeRefreshLayout.setOnRefreshListener(this::fetchNewsData);
 
         return view;
     }
 
     private void fetchNewsData() {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -70,6 +80,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<NewsApiResponse>() {
             @Override
             public void onResponse(@NonNull Call<NewsApiResponse> call, @NonNull Response<NewsApiResponse> response) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     swipeRefreshLayout.setRefreshing(false);
@@ -91,6 +102,7 @@ public class HomeFragment extends Fragment {
                             newsList.add(news);
                         }
                     }
+                    newsViewModel.setNewsList(newsList);
                     newsAdapter.notifyDataSetChanged();
                 }
             }
