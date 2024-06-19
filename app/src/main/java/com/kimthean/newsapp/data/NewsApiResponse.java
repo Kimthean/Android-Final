@@ -7,7 +7,11 @@ import java.util.List;
 public class NewsApiResponse {
 
     @SerializedName("articles")
-    private List<Article> articles;
+    private final List<Article> articles;
+
+    public NewsApiResponse(List<Article> articles) {
+        this.articles = articles;
+    }
 
 
     public List<Article> getArticles() {

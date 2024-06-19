@@ -54,6 +54,8 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                newsList.clear();
+                newsAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.VISIBLE);
                 tvNoResults.setVisibility(View.GONE);
                 performSearch(query);
@@ -99,7 +101,6 @@ public class SearchFragment extends Fragment {
                             if (!Objects.equals(article.getTitle(), "[Removed]") && article.getUrlToImage() != null) {
                                 News news = new News(
                                         article.getTitle(),
-                                        article.getDescription(),
                                         article.getUrlToImage(),
                                         article.getNewsSource(),
                                         article.getPublishedAt(),

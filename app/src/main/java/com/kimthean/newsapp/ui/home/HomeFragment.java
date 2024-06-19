@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<NewsApiResponse> call, @NonNull Response<NewsApiResponse> response) {
                 progressBar.setVisibility(View.VISIBLE);
+                Log.d("HomeFragment", "onResponse: " + response);
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     swipeRefreshLayout.setRefreshing(false);
@@ -93,7 +94,6 @@ public class HomeFragment extends Fragment {
                         if (!Objects.equals(article.getTitle(), "[Removed]") && article.getUrlToImage() != null) {
                             News news = new News(
                                     article.getTitle(),
-                                    article.getDescription(),
                                     article.getUrlToImage(),
                                     article.getNewsSource(),
                                     article.getPublishedAt(),

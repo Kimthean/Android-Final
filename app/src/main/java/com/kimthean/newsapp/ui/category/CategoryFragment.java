@@ -1,6 +1,5 @@
 package com.kimthean.newsapp.ui.category;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -39,10 +40,12 @@ public class CategoryFragment extends Fragment {
 
     private NewsAdapter newsAdapter;
     private ProgressBar progressBar;
-    private final List<News> newsList = new ArrayList<>();
+    private List<News> newsList = new ArrayList<>();
     private RecyclerView rvNews;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private CategoryViewModel categoryViewModel;
 
 
     @Override
@@ -51,7 +54,7 @@ public class CategoryFragment extends Fragment {
 
         LinearLayout categoryLayout = view.findViewById(R.id.categoryLayout);
         TextView categoryTitle = view.findViewById(R.id.tvCategory);
-        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
@@ -59,17 +62,34 @@ public class CategoryFragment extends Fragment {
         newsAdapter = new NewsAdapter(newsList);
         rvNews.setAdapter(newsAdapter);
 
-        categoryTitle.setText("Technology");
-        this.progressBar = progressBar;
+        categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+
+        categoryViewModel.getNewsList().observe(getViewLifecycleOwner(), new Observer<List<News>>() {
+            @Override
+            public void onChanged(List<News> news) {
+                newsAdapter.setNews(news);
+            }
+        });
+
+        categoryViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String category) {
+                categoryTitle.setText(category.toUpperCase(Locale.ROOT));
+            }
+        });
+
+        if (categoryViewModel.getCategory().getValue() == null) {
+            categoryViewModel.setCategory("Technology");
+        }
 
         progressBar.setVisibility(View.VISIBLE);
 
-        fetchNewsData("technology");
+        fetchNewsData(categoryViewModel.getCategory().getValue());
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchNewsData(categoryTitle.getText().toString().toLowerCase(Locale.ROOT));
+                fetchNewsData(categoryViewModel.getCategory().getValue());
             }
         });
 
@@ -90,14 +110,15 @@ public class CategoryFragment extends Fragment {
                     }
                     progressBar.setVisibility(View.VISIBLE);
                     rvNews.setVisibility(View.GONE);
-                    fetchNewsData(category.toLowerCase(Locale.ROOT));
-                    categoryTitle.setText(category);
+                    String selectedCategory = category.toLowerCase(Locale.ROOT);
+                    categoryViewModel.setCategory(selectedCategory);
+                    fetchNewsData(selectedCategory);
                     v.setSelected(true);
                     Toast.makeText(getContext(), "Selected category: " + category, Toast.LENGTH_SHORT).show();
                 }
             });
 
-            if (category.equalsIgnoreCase("Technology")) {
+            if (category.equalsIgnoreCase(categoryViewModel.getCategory().getValue())) {
                 button.setSelected(true);
             }
 
@@ -133,7 +154,6 @@ public class CategoryFragment extends Fragment {
                         if (!Objects.equals(article.getTitle(), "[Removed]") && article.getUrlToImage() != null) {
                             News news = new News(
                                     article.getTitle(),
-                                    article.getDescription(),
                                     article.getUrlToImage(),
                                     article.getNewsSource(),
                                     article.getPublishedAt(),
@@ -142,7 +162,8 @@ public class CategoryFragment extends Fragment {
                             newsList.add(news);
                         }
                     }
-                    newsAdapter.notifyDataSetChanged();
+                    categoryViewModel.setNewsList(newsList);
+                    categoryViewModel.setCategory(category);
                 }
             }
 

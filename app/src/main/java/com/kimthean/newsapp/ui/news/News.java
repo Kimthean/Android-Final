@@ -7,19 +7,17 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class News {
-    private String title;
-    private String description;
-    private String imageUrl;
+    private final String title;
+    private final String imageUrl;
 
     private Source newsSource;
 
-    private String newsTimeUpdated;
+    private final String newsTimeUpdated;
 
     private String newsUrl;
 
-    public News(String title, String description, String imageUrl, Source newsSource, String newsTimeUpdated, String newsUrl) {
+    public News(String title, String imageUrl, Source newsSource, String newsTimeUpdated, String newsUrl) {
         this.title = title;
-        this.description = description;
         this.imageUrl = imageUrl;
         this.newsSource= newsSource;
         this.newsTimeUpdated = newsTimeUpdated;

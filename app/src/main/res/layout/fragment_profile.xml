@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/bookmarkCardView"
+        android:id="@+id/bookmark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/userSettingCardView"
+        android:id="@+id/userSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -86,9 +86,9 @@
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookmarkCardView">
+        app:layout_constraintTop_toBottomOf="@+id/bookmark">
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/userSetting"
+            android:id="@+id/userSettingText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -105,6 +105,6 @@
         android:text="@string/sign_out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userSettingCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/userSetting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

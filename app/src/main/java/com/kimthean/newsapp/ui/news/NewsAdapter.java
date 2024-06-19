@@ -13,10 +13,15 @@ import java.util.List;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
-    private final List<News> newsList;
+    private List<News> newsList;
 
     public NewsAdapter(List<News> newsList) {
         this.newsList = newsList;
+    }
+
+    public void setNews(List<News> newsList) {
+        this.newsList = newsList;
+        notifyDataSetChanged();
     }
 
     @NonNull
