@@ -22,4 +22,6 @@
     <string name="username_hint">Username</string>
     <string name="search_hint">Search for anything</string>
     <string name="bookmarks">Bookmarks</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="no_bookmarks">No Bookmark Found</string>
 </resources>

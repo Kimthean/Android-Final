@@ -21,4 +21,7 @@ public class Source {
         this.id = id;
     }
 
+    public void setName(String sourceName) {
+        this.name = sourceName;
+    }
 }

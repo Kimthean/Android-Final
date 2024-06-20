@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kimthean.newsapp.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private List<News> newsList;
+
 
     public NewsAdapter(List<News> newsList) {
         this.newsList = newsList;
@@ -35,7 +38,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         News news = newsList.get(position);
         holder.bind(news);
+
     }
+
 
     @Override
     public int getItemCount() {

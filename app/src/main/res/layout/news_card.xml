@@ -65,10 +65,9 @@
 
                 <ImageButton
                     android:id="@+id/bookmarkButton"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_bookmark"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/bookmark" />
 

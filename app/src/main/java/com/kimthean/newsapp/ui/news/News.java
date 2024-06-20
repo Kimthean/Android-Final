@@ -10,11 +10,11 @@ public class News {
     private final String title;
     private final String imageUrl;
 
-    private Source newsSource;
+    private final Source newsSource;
 
     private final String newsTimeUpdated;
 
-    private String newsUrl;
+    private final String newsUrl;
 
     public News(String title, String imageUrl, Source newsSource, String newsTimeUpdated, String newsUrl) {
         this.title = title;

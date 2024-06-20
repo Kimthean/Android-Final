@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.bookmarkFragment);
+                navController.navigate(R.id.navigation_bookmark);
             }
         });
 

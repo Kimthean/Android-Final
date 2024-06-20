@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,9 +18,7 @@ import com.kimthean.newsapp.NewsDetailActivity;
 import com.kimthean.newsapp.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -52,11 +51,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         newsTimeUpdated = itemView.findViewById(R.id.newsTimeUpdated);
         bookmarkButton = itemView.findViewById(R.id.bookmarkButton);
 
-        if (isBookmarked) {
-            bookmarkButton.setBackground(itemView.getContext().getDrawable(R.drawable.ic_bookmark_filled));
-        } else {
-            bookmarkButton.setBackground(itemView.getContext().getDrawable(R.drawable.ic_bookmark));
-        }
 
 
         itemView.setOnClickListener(v -> {
@@ -84,6 +78,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(News news) {
+        checkBookmarkStatus(news);
         newsTitle.setText(news.getTitle());
         Glide.with(itemView.getContext()).load(news.getImageUrl()).into(newsImage);
         newsSource.setText(news.getNewsSource().getName());
@@ -96,8 +91,17 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
             String bookmarkId = news.getTitle() + "_" + userId;
 
             if (isBookmarked) {
-                bookmarkRef.delete();
-                isBookmarked = false;
+                bookmarkRef.delete()
+                        .addOnSuccessListener(aVoid -> {
+                            isBookmarked = false;
+                            bookmarkButton.setBackground(AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_bookmark));
+                            Toast.makeText(itemView.getContext(), "Bookmark removed", Toast.LENGTH_SHORT).show();
+                            bookmarkRef = null;
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("NewsViewHolder", "Failed to remove bookmark", e);
+                            Toast.makeText(itemView.getContext(), "Failed to remove bookmark", Toast.LENGTH_SHORT).show();
+                        });
             } else {
                 Map<String, Object> bookmarkData = new HashMap<>();
                 bookmarkData.put("title", news.getTitle());
@@ -113,14 +117,14 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
                         .set(bookmarkData)
                         .addOnSuccessListener(aVoid -> {
                             isBookmarked = true;
-//                            bookmarkButton.setBackground(itemView.getContext().getDrawable(R.drawable.ic_bookmark_filled));
+                            bookmarkButton.setBackground(AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_bookmark_filled));
+                            Toast.makeText(itemView.getContext(), "Bookmark added", Toast.LENGTH_SHORT).show();
                             bookmarkRef = firestore.collection("users")
                                     .document(userId)
                                     .collection("bookmarks")
                                     .document(bookmarkId);
                         })
                         .addOnFailureListener(e -> {
-                            // Failed to add bookmark
                             Log.e("NewsViewHolder", "Failed to add bookmark", e);
                             Toast.makeText(itemView.getContext(), "Failed to add bookmark", Toast.LENGTH_SHORT).show();
                         });
@@ -128,5 +132,32 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    private void checkBookmarkStatus(News news) {
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            String bookmarkId = news.getTitle() + "_" + userId;
+
+            firestore.collection("users")
+                    .document(userId)
+                    .collection("bookmarks")
+                    .document(bookmarkId)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            isBookmarked = true;
+                            bookmarkButton.setBackground(AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_bookmark_filled));
+                            bookmarkRef = documentSnapshot.getReference();
+                        } else {
+                            isBookmarked = false;
+                            bookmarkButton.setBackground(AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_bookmark));
+                            bookmarkRef = null;
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("NewsViewHolder", "Failed to check bookmark status", e);
+                        Toast.makeText(itemView.getContext(), "Failed to check bookmark status", Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
 
 }
