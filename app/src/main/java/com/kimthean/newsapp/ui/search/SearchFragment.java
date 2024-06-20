@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kimthean.newsapp.BuildConfig;
 import com.kimthean.newsapp.R;
 import com.kimthean.newsapp.api.NewsApiService;
 import com.kimthean.newsapp.data.Article;
@@ -72,13 +73,16 @@ public class SearchFragment extends Fragment {
     }
 
     private void performSearch(String query) {
+
+        String apiKey = BuildConfig.NewsAPIKey;
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         NewsApiService newsApiService = retrofit.create(NewsApiService.class);
-        Call<NewsApiResponse> call = newsApiService.getEverything(query, "15c48473a93d4ec988e6acdee9055ac4");
+        Call<NewsApiResponse> call = newsApiService.getEverything(query, apiKey);
         call.enqueue(new Callback<NewsApiResponse>() {
             @Override
             public void onResponse(@NonNull Call<NewsApiResponse> call, @NonNull Response<NewsApiResponse> response) {

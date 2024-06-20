@@ -6,15 +6,16 @@ plugins {
 android {
     namespace 'com.kimthean.newsapp'
     compileSdk 34
-
     defaultConfig {
         applicationId "com.kimthean.newsapp"
         minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
+        buildFeatures.buildConfig = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'CLIENT_ID', "\"${CLIENT_ID}\""
+        buildConfigField 'String', 'NewsAPIKey', "\"${NewsAPIKey}\""
     }
 
     buildTypes {

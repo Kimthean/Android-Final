@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.kimthean.newsapp.BuildConfig;
 import com.kimthean.newsapp.R;
 import com.kimthean.newsapp.api.NewsApiService;
 import com.kimthean.newsapp.data.Article;
@@ -130,6 +131,8 @@ public class CategoryFragment extends Fragment {
 
     private void fetchNewsData(String category) {
 
+        String apiKey = BuildConfig.NewsAPIKey;
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -137,7 +140,7 @@ public class CategoryFragment extends Fragment {
 
         NewsApiService newsApiService = retrofit.create(NewsApiService.class);
 
-        Call<NewsApiResponse> call = newsApiService.getTopHeadlines("us", "15c48473a93d4ec988e6acdee9055ac4", category);
+        Call<NewsApiResponse> call = newsApiService.getTopHeadlines("us", apiKey, category);
         call.enqueue(new Callback<NewsApiResponse>() {
             @Override
             public void onResponse(@NonNull Call<NewsApiResponse> call, @NonNull Response<NewsApiResponse> response) {
