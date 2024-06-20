@@ -41,7 +41,9 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private DocumentReference bookmarkRef;
 
 
-
+    public String sanitizeTitle(String title) {
+        return title.replaceAll("[^a-zA-Z0-9-_]", "_");
+    }
 
     public NewsViewHolder(@NonNull View itemView, List<News> newsList) {
         super(itemView);
@@ -88,7 +90,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private void toggleBookmark(News news) {
         if (currentUser != null) {
             String userId = currentUser.getUid();
-            String bookmarkId = news.getTitle() + "_" + userId;
+            String sanitizedTitle = sanitizeTitle(news.getTitle());
+            String bookmarkId = sanitizedTitle + "_" + userId;
 
             if (isBookmarked) {
                 bookmarkRef.delete()
@@ -135,7 +138,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private void checkBookmarkStatus(News news) {
         if (currentUser != null) {
             String userId = currentUser.getUid();
-            String bookmarkId = news.getTitle() + "_" + userId;
+            String sanitizedTitle = sanitizeTitle(news.getTitle());
+            String bookmarkId = sanitizedTitle + "_" + userId;
 
             firestore.collection("users")
                     .document(userId)
