@@ -23,7 +23,7 @@
         android:textStyle="bold"
         android:textSize="32sp"
         android:paddingBottom="16dp"
-        android:text="@string/login"
+        android:text="@string/sign_in"
         />
 
     <com.google.android.material.textfield.TextInputLayout

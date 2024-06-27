@@ -24,4 +24,5 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="title_bookmark">Bookmark</string>
     <string name="no_bookmarks">No Bookmark Found</string>
+    <string name="sign_in">Sign In</string>
 </resources>

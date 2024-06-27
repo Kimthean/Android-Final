@@ -1,9 +1,12 @@
 package com.kimthean.newsapp.ui.news;
 
+import android.util.Log;
+
 import com.kimthean.newsapp.data.Source;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class News {
@@ -37,14 +40,15 @@ public class News {
 
     public String getNewsTimeUpdated() {
         try {
-            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date date = isoFormat.parse(newsTimeUpdated);
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+            originalFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = originalFormat.parse(newsTimeUpdated);
 
-            SimpleDateFormat readableFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+            SimpleDateFormat readableFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.ENGLISH);
+            readableFormat.setTimeZone(TimeZone.getDefault());
             return readableFormat.format(date);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("News", "Error parsing date", e);
             return newsTimeUpdated;
         }
     }
